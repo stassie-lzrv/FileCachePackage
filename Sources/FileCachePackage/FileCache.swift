@@ -10,8 +10,7 @@ import CocoaLumberjackSwift
 
 public protocol JSONConvertible {
     associatedtype Item: JSONConvertible
-    init?(json: [String: Any])
-    var json: [String: Any] { get }
+    var json:  Any { get }
     static func parse(json: Any) -> Item?
 }
 
