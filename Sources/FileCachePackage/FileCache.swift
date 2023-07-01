@@ -21,9 +21,10 @@ public protocol IdentifiableType {
 }
 
 public class FileCache<Item: JSONConvertible & IdentifiableType> {
-    let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    public init(){}
+    public let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     
-     var todoItemCollection : [Item] = []
+    public var todoItemCollection : [Item] = []
     
     func addNewTask(_ newTask : Item){
         if let ind = todoItemCollection.firstIndex(where: {$0.id == newTask.id}){
