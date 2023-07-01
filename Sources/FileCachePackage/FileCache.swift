@@ -16,7 +16,7 @@ public protocol JSONConvertible {
 
 
 public protocol IdentifiableType {
-    var id: String { get }
+     var id: String { get }
 }
 
 public class FileCache<Item: JSONConvertible & IdentifiableType> {
@@ -25,7 +25,7 @@ public class FileCache<Item: JSONConvertible & IdentifiableType> {
     
     public var todoItemCollection : [Item] = []
     
-    func addNewTask(_ newTask : Item){
+    public func addNewTask(_ newTask : Item){
         if let ind = todoItemCollection.firstIndex(where: {$0.id == newTask.id}){
             todoItemCollection[ind] = newTask
         } else {
@@ -33,11 +33,11 @@ public class FileCache<Item: JSONConvertible & IdentifiableType> {
         }
     }
     
-    func deleteTask(with id: String){
+    public func deleteTask(with id: String){
         todoItemCollection.removeAll(where: {$0.id == id})
     }
     
-    func saveJSON(filename: String){
+    public func saveJSON(filename: String){
         let urlPath = url.appendingPathComponent(filename)
         let jsonItems = todoItemCollection.map({$0.json})
         do {
@@ -48,7 +48,7 @@ public class FileCache<Item: JSONConvertible & IdentifiableType> {
         }
     }
     
-    func loadJSON(filename: String){
+    public func loadJSON(filename: String){
         let urlPath = url.appendingPathComponent(filename)
         if FileManager.default.fileExists(atPath: urlPath.path),
            let data = try? Data(contentsOf: urlPath),
@@ -59,7 +59,7 @@ public class FileCache<Item: JSONConvertible & IdentifiableType> {
         }
     }
     
-    func fetchItemsFromJson(_ json: [Any]) -> [Item]? {
+    public func fetchItemsFromJson(_ json: [Any]) -> [Item]? {
            return json.compactMap { Item.parse(json: $0) as? Item }
        }
     
