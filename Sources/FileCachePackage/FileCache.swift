@@ -22,7 +22,7 @@ public protocol IdentifiableType {
 public class FileCache<Item: JSONConvertible & IdentifiableType> {
     public init(){}
     public let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-    var isDirty = false
+    public var isDirty = false
     public var todoItemCollection : [Item] = []
     
     public func addNewTask(_ newTask : Item){
